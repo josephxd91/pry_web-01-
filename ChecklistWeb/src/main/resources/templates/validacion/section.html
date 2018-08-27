@@ -1,0 +1,229 @@
+<div class="card">
+	<div class="card-header" style="background-color: #e3f2fd;">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb bg-dark">
+				<li class="breadcrumb-item"><a href="#"
+					th:text="${subElemento.idelemento.nombre}">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page"><label
+					th:text="${subElemento.nombre}"
+					style="color: white; font-weight: bold;"></label></li>
+
+
+			</ol>
+
+			<form class="form-inline">
+				<input class="form-control mr-sm-2" type="search"
+					placeholder="Escriba algo" id="txtsearch" aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0"
+					onclick="fnSearchAction()" type="button">Buscar validacion
+					o contenido</button>
+
+				<button type="button" style="margin-left: 10px;"
+					class="btn btn-outline-primary my-2 my-sm-0"
+					onclick="fnOpenModal()">Agregar contenido</button>
+
+				<!-- 				<button type="button" onclick="fnOpenModal()" -->
+				<!-- 					class="btn btn-primary" style="margin-bottom: 10px;">Agregar -->
+				<!-- 					contenido</button> -->
+			</form>
+
+		</nav>
+
+	</div>
+	<div class="card-body">
+		<!-- 		<h5 class="card-title">Agregar secciones</h5> -->
+		<!-- 		<p class="card-text">With supporting text below as a natural -->
+		<!-- 			lead-in to additional content.</p> -->
+
+		<div id="content-info">
+
+			<div th:if="${detalleValidacion.TotalElements!=0}">
+				<nav th:replace="layout/fragments/paginator-nav :: paginator"></nav>
+			</div>
+
+			<div class="list-group">
+				<div th:each="detalle : ${detalleValidacion}" href="#"
+					title="Detalle"
+					th:attr="data-content=${detalle.idvalidacion.detalle}"
+					data-html="true" role="button" data-toggle="popover"
+					data-trigger="hover"
+					th:class="${detalle.idvalidacion.estado? 'list-group-item list-group-item-action flex-column align-items-start': 'list-group-item list-group-item-action flex-column align-items-start disabledbutton'}">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1"
+							th:text="${detalle.idvalidacion.idrevisionValidacion+'. '+detalle.idvalidacion.revision}"></h5>
+						<small>Fecha de modificacion <label
+							th:text="${detalle.fechaModificacion}"></label>
+							<button
+								th:onclick="'fnDisabledSection(\'' + ${detalle.idvalidacion.idrevisionValidacion} + '\');'">
+								<i class='fa fa-trash-o' style='font-size: 24px; color: brown;'
+									aria-hidden='true'></i>Eliminar
+							</button> <a
+							th:onclick="'fnLoadSection(\'' + ${detalle.idvalidacion.idrevisionValidacion} + '\');'">
+								<i class='fa fa-eye' style='font-size: 24px; color: brown;'
+								aria-hidden='true'></i>Ver
+						</a>
+						</small>
+
+
+					</div>
+
+					<small>Modificado por <cite title="Source Title"
+						th:text="${detalle.idusuario.nombres}"></cite></small>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="myModal"
+	role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle">
+
+					<!-- algun titulo -->
+
+				</h5>
+				<button type="button" class="close" onclick="fnCloseModal()"
+					aria-label="Cerrar">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+
+
+				<div class="card">
+					<h5 class="card-header">
+
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#"
+								th:text="${subElemento.idelemento.nombre}">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page"
+								th:text="${subElemento.nombre}">>Library</li>
+						</ol>
+
+
+					</h5>
+
+
+					<div class="card-body">
+						<h5 class="card-title">Special title treatment</h5>
+						<p class="card-text">With supporting text below as a natural
+							lead-in to additional content.</p>
+						<form method="post" enctype="multipart/form-data">
+
+
+
+
+							<input type="hidden" id="txtrevisionid" th:attr="value='0'"
+								name="idrevisionValidacion" /> <input type="hidden"
+								id="txtidsubelemento"
+								th:attr="value=${subElemento.idsubelemento}"
+								name="idsubelemento.idsubelemento" />
+
+
+
+							<div class="form-group">
+								<label for="exampleFormControlInput1">Revision</label> <input
+									type="text" class="form-control" id="txtrevision"
+									name="revision" placeholder="">
+							</div>
+							<div class="form-group">
+								<label for="exampleFormControlTextarea1">Detalle</label>
+								<!-- 								<textarea class="form-control" id="txtdetalle" name="detalle" -->
+								<!-- 									rows="3"></textarea> -->
+
+								<textarea class="form-control" id="txtdetalle" name="editordata"></textarea>
+							</div>
+
+							<div class="form-group">
+								<label for="exampleFormControlTextarea1">Ayuda</label>
+								<!-- 								<textarea class="form-control" id="txtayuda" rows="3" -->
+								<!-- 									name="ayuda"></textarea> -->
+								<textarea class="form-control" id="txtayuda" name="editordata"></textarea>
+
+								<!-- 																 <div id="summernote"></div> -->
+							</div>
+						</form>
+
+
+					</div>
+				</div>
+
+
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary"
+					onclick="fnCloseModal()">Cerrar</button>
+				<button type="button" class="btn btn-primary"
+					onclick="fnAplicarCambios();">Aplicar cambios</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(
+
+			function() {
+				$('[data-toggle="popover"]').popover({
+					trigger : "manual",
+					html : true,
+					animation : false
+				}).on("mouseenter", function() {
+					var _this = this;
+					$(this).popover("show");
+					$(".popover").on("mouseleave", function() {
+						$(_this).popover('hide');
+					});
+				}).on("mouseleave", function() {
+					var _this = this;
+					setTimeout(function() {
+						if (!$(".popover:hover").length) {
+							$(_this).popover("hide");
+						}
+					}, 100);
+				});
+
+				$('#txtdetalle').summernote(
+						{
+							tabsize : 2,
+							height : 300,
+							lang : 'es-ES',
+							toolbar : [
+									// [groupName, [list of button]]
+									[
+											'style',
+											[ 'bold', 'italic', 'underline',
+													'clear' ] ],
+									[
+											'font',
+											[ 'strikethrough', 'superscript',
+													'subscript' ] ],
+									[ 'fontsize', [ 'fontsize' ] ],
+									[ 'color', [ 'color' ] ],
+									[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+									[ 'height', [ 'height' ] ] ]
+						});
+
+				$('#txtayuda').summernote({
+					tabsize : 2,
+					height : 600,
+					lang : 'es-ES',
+					callbacks : {
+						onImageUpload : function(files, editor, welEditable) {
+							for (var i = files.length - 1; i >= 0; i--) {
+								sendFile(files[i], this);
+							}
+						}
+					}
+				});
+
+			});
+</script>

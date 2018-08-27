@@ -1,0 +1,8 @@
+.modal-lg {
+    max-width: 85% !important;
+}
+
+.disabledbutton {
+    pointer-events: none;
+    opacity: 0.4;
+}

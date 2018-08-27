@@ -1,0 +1,136 @@
+<head th:insert="layout/layoutx :: head" />
+
+<th:block th:replace="layout/layoutx :: content01" />
+
+<div class="row">
+	<!-- <div class="col-md-2">
+	</div> -->
+	<div class="container-fluid">
+
+		<div class="card">
+			<h5 class="card-header" th:text="${cabecera}"></h5>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="card">
+							<div class="card-header">Herramientas y Formatos</div>
+							<div class="card-body">
+								<ol class="dd-list">
+
+									<li th:each="elemento :${elementos}" class="dd-item dd3-item"
+										th:attr="data-id=${elemento.idelemento}">
+										<div class="dd-handle dd3-handle"
+										
+										data-toggle="popover" html="true"
+													title="Acciones"
+													data-content="<div class='card' style='width: 9rem;'>
+														  <ul class='list-group list-group-flush'>
+    													 <li class='list-group-item'><a href='#' class='card-link'>
+    													 <i class='fa fa-trash-o' style='font-size:24px;color: brown;' aria-hidden='true'>
+    													 </i> Eliminar</a></li>
+    												    <li class='list-group-item'>
+    												     <a href='#' class='card-link'>
+    												     <i class='fa fa-pencil-square-o' style='font-size:24px;color: brown;' aria-hidden='true'></i> Editar  </ul>
+														</div>"
+														
+														
+										></div>
+										<div class="dd3-content">
+											<label
+												th:if="${not #lists.isEmpty(elemento.subElementoList)}"
+												th:text="${elemento.nombre}"> </label>
+
+										</div>
+
+										<ol class="dd-list"
+											th:if="${not #lists.isEmpty(elemento.subElementoList)}">
+											<li class="dd-item dd3-item"
+												th:each="sub_elemento : ${elemento.subElementoList}"
+												th:attr="data-id=${sub_elemento.idsubelemento}">
+												<div class="dd-handle dd3-handle" 
+												data-toggle="popover" html="true"
+													title="Acciones"
+													data-content="<div class='card' style='width: 9rem;'>
+														  <ul class='list-group list-group-flush'>
+    													 <li class='list-group-item'><a href='#' class='card-link'>
+    													 <i class='fa fa-trash-o' style='font-size:24px;color: brown;' aria-hidden='true'>
+    													 </i> Eliminar</a></li>
+    												    <li class='list-group-item'>
+    												     <a href='#' class='card-link'>
+    												     <i class='fa fa-pencil-square-o' style='font-size:24px;color: brown;' aria-hidden='true'></i> Editar  </ul>
+														</div>"
+												
+												></div>
+												<div class="dd3-content" 
+												>
+													<a
+														th:onclick="'fviewSetting(\'' + ${sub_elemento.idsubelemento} + '\',0);'"
+														th:text="${sub_elemento.nombre}"></a>
+												</div>
+											</li>
+										</ol>
+									</li>
+								</ol>
+							</div>
+						</div>
+
+
+
+					</div>
+
+					<div class="col-md-9">
+						<div id="sections_content"></div>
+					</div>
+				</div>
+
+
+				<!-- <h5 class="card-title">Special title treatment</h5> -->
+				<!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+				<!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+			</div>
+		</div>
+
+
+	</div>
+	<!-- <div class="col-md-2">
+	</div> -->
+</div>
+
+
+<!-- End Container fluid  -->
+
+
+
+
+
+<th:block th:replace="layout/layoutx :: content02" />
+
+
+
+<script>
+	$(document).ready(
+
+	function() {
+		$('[data-toggle="popover"]').popover({
+			trigger : "manual",
+			html : true,
+			animation : false
+		}).on("mouseenter", function() {
+			var _this = this;
+			$(this).popover("show");
+			$(".popover").on("mouseleave", function() {
+				$(_this).popover('hide');
+			});
+		}).on("mouseleave", function() {
+			var _this = this;
+			setTimeout(function() {
+				if (!$(".popover:hover").length) {
+					$(_this).popover("hide");
+				}
+			}, 100);
+
+		});
+
+	});
+</script>
+
