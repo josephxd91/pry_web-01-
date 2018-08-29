@@ -12,8 +12,12 @@ public class SettingController {
 	
 	@RequestMapping(value = { "/setting" })
 	public String init(Model model) {
-//		model.addAttribute("cabecera", "Revision");
+		model.addAttribute("cabecera", "Configuraciones");
+		
+		System.out.println("2asdasdasdasdsadasd");
 		return "/setting/content_setting";
 	}
+	
+	
 
 }
