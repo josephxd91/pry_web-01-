@@ -123,3 +123,52 @@ sendFile = function(file, el) {
 	});
 
 };
+
+
+
+
+
+//////////////////////////////////////////////////////////////////
+
+fnAplicarCambios = function(){
+	
+	var data = {
+		"idusuario":$("#txtIdUser").val(),
+		"nombres":$("#txtNombre").val(),
+		"apellidos":$("#txtApellido").val(),
+		"matricula":$("#txtMatricula").val(),
+		"username":$("#txtUsuario").val(),
+		"password":$("#txtPassword").val(),
+		"estado":$("#chkEstado").is(":checked"),
+		"authoritiesList":{"Authorities":{"idauthorities":"1"}}
+	} 
+	
+	console.log("data => " + data);
+	
+	
+	$.ajax({
+		data:data,
+		type: "post",
+		url : "/setting/aplicar_cambios",
+		cache:false,
+		success:function(data){
+			
+		},
+		error:function(data){
+			
+		}
+	})
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -89,7 +89,7 @@ public class Usuario implements Serializable {
     @Size(max = 100)
     @Column(name = "email_everis", length = 100)
     private String emailEveris;
-    @OneToMany(mappedBy = "iduser", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "iduser", fetch = FetchType.LAZY)
     private List<Authorities> authoritiesList;
 
     public Usuario() {
@@ -217,9 +217,16 @@ public class Usuario implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "pe.edu.cibertec.spring.bean2.Usuario[ idusuario=" + idusuario + " ]";
-    }
+	@Override
+	public String toString() {
+		return "Usuario [idusuario=" + idusuario + ", nombres=" + nombres + ", apellidos=" + apellidos + ", matricula="
+				+ matricula + ", username=" + username + ", password=" + password + ", estado=" + estado
+				+ ", authoritiesList=" + authoritiesList + "]";
+	}
+
+	
+
+  
+    
     
 }

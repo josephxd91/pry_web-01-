@@ -51,7 +51,7 @@ public class Roles implements Serializable {
     private String descripcion;
     @Column(name = "estado")
     private Boolean estado;
-    @OneToMany(mappedBy = "idrol", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "idrol", fetch = FetchType.LAZY)
     private List<Authorities> authoritiesList;
 
     public Roles() {

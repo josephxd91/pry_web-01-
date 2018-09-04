@@ -42,7 +42,7 @@ public class Authorities implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     private Roles idrol;
     @JoinColumn(name = "iduser", referencedColumnName = "idusuario")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Usuario iduser;
 
     public Authorities() {
