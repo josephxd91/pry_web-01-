@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bolsadeideas.springboot.app.models.dao.IUsuarioDao;
-import com.bolsadeideas.springboot.app.models.entity.Authorities;
+import com.bolsadeideas.springboot.app.models.entity.Perfil;
 //import com.bolsadeideas.springboot.app.models.entity.Role;
 import com.bolsadeideas.springboot.app.models.entity.Usuario;
 
@@ -42,10 +42,16 @@ public class JpaUserDetailsService implements UserDetailsService{
         }
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         
-        for(Authorities role: usuario.getAuthoritiesList()) {
-        	logger.info("Role: ".concat(role.getIdrol().getRolNombre()));
-        	authorities.add(new SimpleGrantedAuthority(role.getIdrol().getRolNombre()));
-        }
+//        for(Authorities role: usuario.getAuthoritiesList()) {
+//        	logger.info("Role: ".concat(role.getIdrol().getRolNombre()));
+//        	authorities.add(new SimpleGrantedAuthority(role.getIdrol().getRolNombre()));
+//        }
+        
+        
+        Perfil perfil = usuario.getPerfil();
+      	authorities.add(new SimpleGrantedAuthority(perfil.getNombre()) );
+        
+        
         
         if(authorities.isEmpty()) {
         	logger.error("Error en el Login: Usuario '" + username + "' no tiene roles asignados!");

@@ -132,7 +132,13 @@ sendFile = function(file, el) {
 
 fnAplicarCambios = function(){
 	
-	var data = {
+	
+	if($("#cboPerfil").val()<0){
+		alert("elija el perfil");
+	}
+	
+	
+	var objecto = {
 		"idusuario":$("#txtIdUser").val(),
 		"nombres":$("#txtNombre").val(),
 		"apellidos":$("#txtApellido").val(),
@@ -140,24 +146,31 @@ fnAplicarCambios = function(){
 		"username":$("#txtUsuario").val(),
 		"password":$("#txtPassword").val(),
 		"estado":$("#chkEstado").is(":checked"),
-		"authoritiesList":{"Authorities":{"idauthorities":"1"}}
+		"perfil.idperfil":$("#cboPerfil").val()
 	} 
 	
-	console.log("data => " + data);
-	
-	
 	$.ajax({
-		data:data,
+		data:objecto,
 		type: "post",
 		url : "/setting/aplicar_cambios",
 		cache:false,
 		success:function(data){
-			
+			alert(data.exito);
+			listar_usuarios();	
 		},
 		error:function(data){
 			
 		}
-	})
+	});
+	
+	
+	$("#txtIdUser").val("0");
+}
+
+listar_usuarios = function(){
+	$.post("/setting/listar",{},function(data){
+		$("#data_user").html(data);
+	});
 }
 
 

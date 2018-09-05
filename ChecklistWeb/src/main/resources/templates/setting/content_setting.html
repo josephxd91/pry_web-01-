@@ -74,10 +74,8 @@
 
 											<form>
 												<div class="form-group">
-													<input type="hidden" id="txtIdUser"
-														placeholder="nombre">
-													
-													<label for="exampleFormControlInput1">Nombres</label> <input
+													<input type="hidden" id="txtIdUser" value="0" /> <label
+														for="exampleFormControlInput1">Nombres</label> <input
 														type="text" class="form-control" id="txtNombre"
 														placeholder="nombre">
 												</div>
@@ -109,10 +107,10 @@
 
 													<div class="form-group col-md-6">
 														<label for="roles">Rol de usuario</label> <select
-															class="custom-select">
+															class="custom-select" id="cboPerfil">
 															<option selected value="-1">Seleccionar un Rol</option>
 															<option th:each="rol : ${roles}"
-																th:attr="value=${rol.idrol}" th:text="${rol.rolNombre}">ONE</option>
+																th:attr="value=${rol.idperfil}" th:text="${rol.nombre}">ONE</option>
 
 														</select>
 													</div>
@@ -123,8 +121,8 @@
 
 												<div class="form-group">
 													<div class="custom-control custom-checkbox">
-														<input type="checkbox" 
-															class="custom-control-input" id="chkEstado"> <label
+														<input type="checkbox" class="custom-control-input"
+															id="chkEstado"> <label
 															class="custom-control-label" for="customCheck1"></label>
 													</div>
 												</div>
@@ -143,9 +141,20 @@
 										<div class="col-md-8">
 											<div class="card">
 												<div class="card-body">
-													<h5 class="card-title">Special title treatment</h5>
+													<h5 class="card-title">Lista de usuarios</h5>
 													<p class="card-text">With supporting text below as a
 														natural lead-in to additional content.</p>
+
+
+													<form class="form-inline">
+														<input class="form-control mr-sm-2" type="search"
+															placeholder="Escriba algo" id="txtsearch"
+															aria-label="Search">
+														<button class="btn btn-outline-success my-2 my-sm-0"
+															onclick="fnSearchUser()" type="button">Buscar
+															Usuario</button>
+												
+													</form>
 
 
 
@@ -170,22 +179,28 @@
 																<td th:text="${usuario.nombres}"></td>
 																<td th:text="${usuario.apellidos}"></td>
 																<td th:text="${usuario.matricula}"></td>
-																<td><i th:each="auth : ${usuario.authoritiesList}">
-																		<label th:text="${auth.idrol.rolNombre}"></label><br>
-																</i></td>
+																<td th:text="${usuario.perfil.nombre}"></td>
 																<!-- 																<td th:text="${usuario.estado}"> -->
 
 																<!-- 																</td> -->
 																<td>
 																	<div class="custom-control custom-checkbox">
-																		<input type="checkbox" 
-																			class="custom-control-input" id="customCheck1">
-																		<label class="custom-control-label" for="customCheck1"></label>
+																		<input type="checkbox" class="custom-control-input"
+																			id="customCheck1"> <label
+																			class="custom-control-label" for="customCheck1"></label>
 																	</div>
 																</td>
 															</tr>
 														</tbody>
 													</table>
+
+
+
+													<div th:if="${usuarios.TotalElements!=0}">
+														<nav th:replace="setting/paginator_user :: paginator"></nav>
+													</div>
+
+
 
 
 

@@ -9,26 +9,27 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Usuario
+ * @author jmendosa
  */
 @Entity
 @Table(name = "usuario", catalog = "qc_help_revision", schema = "")
@@ -54,29 +55,19 @@ public class Usuario implements Serializable {
     @Column(name = "idusuario", nullable = false)
     private Integer idusuario;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "nombres", nullable = false, length = 45)
     private String nombres;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
     @Column(name = "apellidos", nullable = false, length = 100)
     private String apellidos;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 7)
     @Column(name = "matricula", nullable = false, length = 7)
     private String matricula;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "username", nullable = false, length = 45)
+    @Column(name = "username", nullable = false, length = 60)
     private String username;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "password", nullable = false, length = 45)
+    @Column(name = "password", nullable = false, length = 60)
     private String password;
     @Column(name = "estado")
     private Boolean estado;
@@ -86,11 +77,13 @@ public class Usuario implements Serializable {
     @Column(name = "fecha_baja")
     @Temporal(TemporalType.DATE)
     private Date fechaBaja;
-    @Size(max = 100)
     @Column(name = "email_everis", length = 100)
     private String emailEveris;
-    @OneToMany(mappedBy = "iduser", fetch = FetchType.LAZY)
-    private List<Authorities> authoritiesList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario", fetch = FetchType.LAZY)
+    private List<ValidacionDetalle> validacionDetalleList;
+    @JoinColumn(name = "perfil", referencedColumnName = "idperfil", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Perfil perfil;
 
     public Usuario() {
     }
@@ -189,12 +182,20 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public List<Authorities> getAuthoritiesList() {
-        return authoritiesList;
+    public List<ValidacionDetalle> getValidacionDetalleList() {
+        return validacionDetalleList;
     }
 
-    public void setAuthoritiesList(List<Authorities> authoritiesList) {
-        this.authoritiesList = authoritiesList;
+    public void setValidacionDetalleList(List<ValidacionDetalle> validacionDetalleList) {
+        this.validacionDetalleList = validacionDetalleList;
+    }
+
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
     @Override
@@ -220,13 +221,10 @@ public class Usuario implements Serializable {
 	@Override
 	public String toString() {
 		return "Usuario [idusuario=" + idusuario + ", nombres=" + nombres + ", apellidos=" + apellidos + ", matricula="
-				+ matricula + ", username=" + username + ", password=" + password + ", estado=" + estado
-				+ ", authoritiesList=" + authoritiesList + "]";
+				+ matricula + ", username=" + username + ", password=" + password + ", estado=" + estado + ", perfil="
+				+ perfil.getIdperfil() + "]";
 	}
 
-	
-
-  
     
     
 }
