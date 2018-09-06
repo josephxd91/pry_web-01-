@@ -138,7 +138,7 @@ fnAplicarCambios = function(){
 	}
 	
 	
-	var objecto = {
+	var object = {
 		"idusuario":$("#txtIdUser").val(),
 		"nombres":$("#txtNombre").val(),
 		"apellidos":$("#txtApellido").val(),
@@ -150,7 +150,7 @@ fnAplicarCambios = function(){
 	} 
 	
 	$.ajax({
-		data:objecto,
+		data:object,
 		type: "post",
 		url : "/setting/aplicar_cambios",
 		cache:false,
@@ -171,6 +171,18 @@ listar_usuarios = function(){
 	$.post("/setting/listar",{},function(data){
 		$("#data_user").html(data);
 	});
+}
+
+fn_load_page_local = function(){
+	$.post("/setting/page_local",{},function(data){
+		$("#load_content").html(data);
+	})
+}
+
+fn_load_page_user= function(){
+	$.post("/setting/page_user",{},function(data){
+		$("#load_content").html(data);
+	})
 }
 
 

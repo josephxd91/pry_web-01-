@@ -20,7 +20,7 @@ public class SpringBootDataJpaApplicationTests {
 
 	public static void main(String[] args) {
 		System.out.println("init...");
-		File file = new File("\\\\LIM-1VR5QN2\\asdasdasdRevisiones");
+		File file = new File("\\\\DESKTOP-JNLEK7O\\Repositorio");
 
 		
 		if(file!=null) {

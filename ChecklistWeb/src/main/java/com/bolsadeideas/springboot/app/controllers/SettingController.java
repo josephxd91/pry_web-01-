@@ -49,6 +49,13 @@ public class SettingController {
 		model.addAttribute("usuarios", usuarios);
 		model.addAttribute("page", pageRender);
 	}
+	
+	@RequestMapping(value = "/setting/page_user", method = RequestMethod.POST)
+	public String pageUser(Model model) {
+		model.addAttribute("roles", rolesService.findAll());
+		listar_todos(model);
+		return "/setting/ajax/user";
+	} 
 
 	@RequestMapping(value = "/setting/aplicar_cambios", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> aplicarCambios(Usuario usuario) {
@@ -64,6 +71,15 @@ public class SettingController {
 
 		return map;
 	}
+	
+	///setting/page_local
+	@RequestMapping(value = "/setting/page_local", method = RequestMethod.POST)
+	public String pageLocal() {
+		return "/setting/ajax/local";
+		
+	}
+	
+	
 
 	@RequestMapping(value = { "/setting/listar" })
 	public String listar(Model model) {
