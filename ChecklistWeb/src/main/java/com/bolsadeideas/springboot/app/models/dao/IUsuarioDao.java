@@ -10,6 +10,7 @@ import com.bolsadeideas.springboot.app.models.entity.Usuario;
 
 public interface IUsuarioDao extends PagingAndSortingRepository<Usuario, Integer>{
 
+	@Query("select u from Usuario u WHERE u.username=?1")
 	public Usuario findByUsername(String username);
 	
 	
@@ -19,6 +20,6 @@ public interface IUsuarioDao extends PagingAndSortingRepository<Usuario, Integer
 	
 	
 	
-	@Query("select u  from Usuario u where (u.nombres like %?1%)")
+	@Query("select u  from Usuario u where u.nombres like %?1%")
 	public Page<Usuario> findAllCustom(String search,Pageable pageable);
 }

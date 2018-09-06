@@ -34,12 +34,16 @@ public class JpaUserDetailsService implements UserDetailsService{
 	@Transactional(readOnly=true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
+		System.out.println("USUARIOS ===> " + username);
         Usuario usuario = usuarioDao.findByUsername(username);
-		
+       
+        
         if(usuario == null) {
         	logger.error("Error en el Login: no existe el usuario '" + username + "' en el sistema!");
         	throw new UsernameNotFoundException("Username: " + username + " no existe en el sistema!");
         }
+        
+        System.out.println("apellidos ===>... " + usuario.getApellidos());
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         
 //        for(Authorities role: usuario.getAuthoritiesList()) {

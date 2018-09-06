@@ -7,65 +7,65 @@
 		<div class="col-md-4">
 			<h5 class="card-title">Form</h5>
 
-			<form>
-				<div class="form-group">
-					<input type="hidden" id="txtIdUser" value="0" /> <label
-						for="exampleFormControlInput1">Nombres</label> <input type="text"
-						class="form-control" id="txtNombre" placeholder="nombre">
-				</div>
+			<!-- 			<form> -->
+			<!-- 				<div class="form-group"> -->
+			<!-- 					<input type="hidden" id="txtIdUser" value="0" /> <label -->
+			<!-- 						for="exampleFormControlInput1">Nombres</label> <input type="text" -->
+			<!-- 						class="form-control" id="txtNombre" placeholder="nombre"> -->
+			<!-- 				</div> -->
 
-				<div class="form-group">
-					<label for="exampleFormControlInput1">Apellidos</label> <input
-						type="text" class="form-control" id="txtApellido"
-						placeholder="Apellidos">
-				</div>
+			<!-- 				<div class="form-group"> -->
+			<!-- 					<label for="exampleFormControlInput1">Apellidos</label> <input -->
+			<!-- 						type="text" class="form-control" id="txtApellido" -->
+			<!-- 						placeholder="Apellidos"> -->
+			<!-- 				</div> -->
 
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label for="">Usuario</label> <input type="text"
-							class="form-control" id="txtUsuario" placeholder="Nombre">
-					</div>
-					<div class="form-group col-md-6">
-						<label for="">Password</label> <input type="password"
-							class="form-control" id="txtPassword" placeholder="password">
-					</div>
-				</div>
+			<!-- 				<div class="form-row"> -->
+			<!-- 					<div class="form-group col-md-6"> -->
+			<!-- 						<label for="">Usuario</label> <input type="text" -->
+			<!-- 							class="form-control" id="txtUsuario" placeholder="Nombre"> -->
+			<!-- 					</div> -->
+			<!-- 					<div class="form-group col-md-6"> -->
+			<!-- 						<label for="">Password</label> <input type="password" -->
+			<!-- 							class="form-control" id="txtPassword" placeholder="password"> -->
+			<!-- 					</div> -->
+			<!-- 				</div> -->
 
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label for="">Matricula</label> <input type="text"
-							class="form-control" id="txtMatricula" placeholder="Matricula">
-					</div>
+			<!-- 				<div class="form-row"> -->
+			<!-- 					<div class="form-group col-md-6"> -->
+			<!-- 						<label for="">Matricula</label> <input type="text" -->
+			<!-- 							class="form-control" id="txtMatricula" placeholder="Matricula"> -->
+			<!-- 					</div> -->
 
-					<div class="form-group col-md-6">
-						<label for="roles">Rol de usuario</label> <select
-							class="custom-select" id="cboPerfil">
-							<option selected value="-1">Seleccionar un Rol</option>
-							<option th:each="rol : ${roles}" th:attr="value=${rol.idperfil}"
-								th:text="${rol.nombre}">ONE</option>
+			<!-- 					<div class="form-group col-md-6"> -->
+			<!-- 						<label for="roles">Rol de usuario</label> <select -->
+			<!-- 							class="custom-select" id="cboPerfil"> -->
+			<!-- 							<option selected value="-1">Seleccionar un Rol</option> -->
+			<!-- 							<option th:each="rol : ${roles}" th:attr="value=${rol.idperfil}" -->
+			<!-- 								th:text="${rol.nombre}">ONE</option> -->
 
-						</select>
-					</div>
-
-
-
-				</div>
-
-				<div class="form-group">
-					<div class="custom-control custom-checkbox">
-						<input type="checkbox" class="custom-control-input" id="chkEstado">
-						<label class="custom-control-label" for="customCheck1"></label>
-					</div>
-				</div>
-
-
-				<!-- "'fviewSetting(\'' + ${sub_elemento.idsubelemento} + '\',0);'" -->
-				<button th:onclick="'fnAplicarCambios();'" class="btn btn-primary">Guardar
-					cambios</button>
+			<!-- 						</select> -->
+			<!-- 					</div> -->
 
 
 
-			</form>
+			<!-- 				</div> -->
+
+			<!-- 				<div class="form-group"> -->
+			<!-- 					<div class="custom-control custom-checkbox"> -->
+			<!-- 						<input type="checkbox" class="custom-control-input" id="chkEstado"> -->
+			<!-- 						<label class="custom-control-label" for="customCheck1"></label> -->
+			<!-- 					</div> -->
+			<!-- 				</div> -->
+
+
+			<!-- 				"'fviewSetting(\'' + ${sub_elemento.idsubelemento} + '\',0);'" -->
+			<!-- 				<button th:onclick="'fnAplicarCambios();'" class="btn btn-primary">Guardar -->
+			<!-- 					cambios</button> -->
+
+
+
+			<!-- 			</form> -->
 
 
 		</div>
@@ -73,46 +73,53 @@
 			<div class="card">
 				<div class="card-body">
 					<h5 class="card-title">Datos del repositorio</h5>
-					<p class="card-text">La informacion siguiente son campos obligatorios de la carpeta compartida</p>
+					<p class="card-text">La informacion siguiente son campos
+						obligatorios de la carpeta compartida</p>
 
 
 
-					<form>
+					<form method="post">
 						<div class="form-row">
 							<div class="col-md-6 mb-3">
-								<label for="validationDefault01">HostName</label> <input
-									type="text" class="form-control" id="validationDefault01"
-									placeholder="HostName" value="" required> <small
-									id="emailHelp" class="form-text text-muted">Por ejemplo : DESKTOP-JNLEK7O</small>
+								<label for="validationDefault01">HostName o Direccion IP</label>
+								<input type="text" class="form-control" id="txtHostName"
+									placeholder="HostName" value="" required /> <label
+									id="mensaje_1"></label><small id="emailHelp"
+									class="form-text text-muted">Por ejemplo :
+									DESKTOP-JNLEK7O</small>
+
 							</div>
-							<div class="col-md-6 mb-3">
-								<label for="validationDefault02">Direccion IP</label> <input
-									type="text" class="form-control" id="validationDefault02"
-									placeholder="Direccion IP" value="" required>
-									 <small
-									id="emailHelp" class="form-text text-muted">Ejemplo : 192.168.1.1</small>
-							</div>
+							<!-- 							<div class="col-md-6 mb-3"> -->
+							<!-- 								<label for="validationDefault02">Direccion IP</label> <input -->
+							<!-- 									type="text" class="form-control" id="txtIp" -->
+							<!-- 									placeholder="Direccion IP" value="" required> -->
+							<!-- 									 <small -->
+							<!-- 									id="emailHelp" class="form-text text-muted">Ejemplo : 192.168.1.1</small> -->
+							<!-- 							</div> -->
 						</div>
 						<div class="form-row">
 							<div class="col-md-12 mb-3">
-								<label for="validationDefault03">Ruta completa</label> <input type="text"
-									class="form-control" id="validationDefault03"
+								<label for="validationDefault03">Ruta completa</label> <input
+									type="text" class="form-control" id="txtRutaCompleta"
 									placeholder="Ruta completa de la carpeta compartida" required>
-									 <small
-									id="emailHelp" class="form-text text-muted">Ejemplo : \\DESKTOP-JNLEK7O\Carpeta_compartida</small>
+								<small id="emailHelp" class="form-text text-muted">Ejemplo
+									: \\DESKTOP-JNLEK7O\Carpeta_compartida</small>
 							</div>
 
 						</div>
-						<div class="form-group">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" value=""
-									id="invalidCheck2" required> <label
-									class="form-check-label" for="invalidCheck2"> Agree to
-									terms and conditions </label>
-							</div>
-						</div>
-						<button class="btn btn-primary" >Submit form</button>
-						<button class="btn btn-primary" >Submit form</button>
+						<!-- 						<div class="form-group"> -->
+						<!-- 							<div class="form-check"> -->
+						<!-- 								<input class="form-check-input" type="checkbox" value="" -->
+						<!-- 									id="invalidCheck2" required> <label -->
+						<!-- 									class="form-check-label" for="invalidCheck2"> Agree to -->
+						<!-- 									terms and conditions </label> -->
+						<!-- 							</div> -->
+						<!-- 						</div> -->
+						<a class="btn btn-success"
+							th:onclick="'fn_validate_folder_shared();'">Validar Ruta
+							Compartida</a>
+						<button class="btn btn-primary">Aplicar Cambios</button>
+
 					</form>
 
 

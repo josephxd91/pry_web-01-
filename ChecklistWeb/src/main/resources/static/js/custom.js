@@ -56,7 +56,7 @@ fnAplicarCambios = function() {
 	fnClearData();
 }
 
-fnRestaureEfectPopper=function(){
+fnRestaureEfectPopper = function() {
 	$('[data-toggle="popover"]').popover('hide');
 }
 
@@ -124,76 +124,77 @@ sendFile = function(file, el) {
 
 };
 
+// ////////////////////////////////////////////////////////////////
 
+fnAplicarCambios = function() {
 
-
-
-//////////////////////////////////////////////////////////////////
-
-fnAplicarCambios = function(){
-	
-	
-	if($("#cboPerfil").val()<0){
+	if ($("#cboPerfil").val() < 0) {
 		alert("elija el perfil");
 	}
-	
-	
+
 	var object = {
-		"idusuario":$("#txtIdUser").val(),
-		"nombres":$("#txtNombre").val(),
-		"apellidos":$("#txtApellido").val(),
-		"matricula":$("#txtMatricula").val(),
-		"username":$("#txtUsuario").val(),
-		"password":$("#txtPassword").val(),
-		"estado":$("#chkEstado").is(":checked"),
-		"perfil.idperfil":$("#cboPerfil").val()
-	} 
-	
+		"idusuario" : $("#txtIdUser").val(),
+		"nombres" : $("#txtNombre").val(),
+		"apellidos" : $("#txtApellido").val(),
+		"matricula" : $("#txtMatricula").val(),
+		"username" : $("#txtUsuario").val(),
+		"password" : $("#txtPassword").val(),
+		"estado" : $("#chkEstado").is(":checked"),
+		"perfil.idperfil" : $("#cboPerfil").val()
+	}
+
 	$.ajax({
-		data:object,
-		type: "post",
+		data : object,
+		type : "post",
 		url : "/setting/aplicar_cambios",
-		cache:false,
-		success:function(data){
+		cache : false,
+		success : function(data) {
 			alert(data.exito);
-			listar_usuarios();	
+			listar_usuarios();
 		},
-		error:function(data){
-			
+		error : function(data) {
+
 		}
 	});
-	
-	
+
 	$("#txtIdUser").val("0");
 }
 
-listar_usuarios = function(){
-	$.post("/setting/listar",{},function(data){
+listar_usuarios = function() {
+	$.post("/setting/listar", {}, function(data) {
 		$("#data_user").html(data);
 	});
 }
 
-fn_load_page_local = function(){
-	$.post("/setting/page_local",{},function(data){
+fn_load_page_local = function() {
+	$.post("/setting/page_local", {}, function(data) {
 		$("#load_content").html(data);
 	})
 }
 
-fn_load_page_user= function(){
-	$.post("/setting/page_user",{},function(data){
+fn_load_page_user = function() {
+	$.post("/setting/page_user", {}, function(data) {
 		$("#load_content").html(data);
 	})
 }
 
 
+fn_validate_folder_shared = function() {
+	$.post("/setting/validateFolderShared", {
+		"folder" : $("#txtRutaCompleta").val(),
+		"hostname" : $("#txtHostName").val()
+	}, function(data) {
+		console.log(data.error)
 
+		if (data.error == null) {
+			$("#mensaje_1").attr("class", "valid-feedback");
+			$("#mensaje_1").text(data.exito);
+			$("#txtHostName").attr("class", "form-control is-valid");
+		} else {
+			$("#mensaje_1").attr("class", "invalid-feedback");
+			$("#mensaje_1").text(data.error);
+			$("#txtHostName").attr("class", "form-control is-invalid");
+		}
+	});
 
-
-
-
-
-
-
-
-
-
+}
