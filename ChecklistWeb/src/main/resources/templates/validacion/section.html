@@ -52,15 +52,17 @@
 
 
 
-			<div th:class="${detalle.idvalidacion.estado? 'list-group-item list-group-item-action flex-column align-items-start': 'list-group-item list-group-item-action flex-column align-items-start disabledbutton'}"   th:each="detalle : ${detalleValidacion}"
+			<div
+				th:class="${detalle.idvalidacion.estado? 'list-group-item list-group-item-action flex-column align-items-start': 'list-group-item list-group-item-action flex-column align-items-start disabledbutton'}"
+				th:each="detalle : ${detalleValidacion}"
 				style="border-radius: 0 0 0 0;">
 				<div class="card-body">
 					<h5 class="card-title"
 						th:text="${detalle.idvalidacion.idrevisionValidacion+'. '+detalle.idvalidacion.revision}"></h5>
 					<h6 class="card-subtitle mb-2 text-muted">
 						Fecha de modificacion <label
-							th:text="${detalle.fechaModificacion}"></label> / Modificado por <cite
-							title="Source Title" th:text="${detalle.idusuario.nombres}"></cite>
+							th:text="${detalle.fechaModificacion}"></label> / Modificado por
+						<cite title="Source Title" th:text="${detalle.idusuario.nombres}"></cite>
 					</h6>
 					<!-- 					<p class="card-text">Some quick example text to build on the -->
 					<!-- 						card title and make up the bulk of the card's content.</p> -->
@@ -72,7 +74,17 @@
 						th:onclick="'fnLoadSection(\'' + ${detalle.idvalidacion.idrevisionValidacion} + '\');'">
 						<i class='fa fa-eye' style='font-size: 24px; color: brown;'
 						aria-hidden='true'></i> Ver
-					</a>
+					</a> 
+					
+					<a class="card-link">
+						<i class='fa fa-eye' style='font-size: 24px; color: brown;'
+						aria-hidden='true'></i>Cumple  <select  class="custom-select" >
+						<option>NO APLICA</option>
+						<option>SI</option>
+						<option>NO</option>
+					</select>
+					</a> 
+					
 				</div>
 			</div>
 
