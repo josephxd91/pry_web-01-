@@ -41,36 +41,47 @@
 				<nav th:replace="layout/fragments/paginator-nav :: paginator"></nav>
 			</div>
 
-			<div class="list-group">
-				<div th:each="detalle : ${detalleValidacion}" href="#"
-					title="Detalle"
-					th:attr="data-content=${detalle.idvalidacion.detalle}"
-					data-html="true" role="button" data-toggle="popover"
-					data-trigger="hover"
-					th:class="${detalle.idvalidacion.estado? 'list-group-item list-group-item-action flex-column align-items-start': 'list-group-item list-group-item-action flex-column align-items-start disabledbutton'}">
-					<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1"
-							th:text="${detalle.idvalidacion.idrevisionValidacion+'. '+detalle.idvalidacion.revision}"></h5>
-						<small>Fecha de modificacion <label
-							th:text="${detalle.fechaModificacion}"></label>
-							<button
-								th:onclick="'fnDisabledSection(\'' + ${detalle.idvalidacion.idrevisionValidacion} + '\');'">
-								<i class='fa fa-trash-o' style='font-size: 24px; color: brown;'
-									aria-hidden='true'></i>Eliminar
-							</button> <a
-							th:onclick="'fnLoadSection(\'' + ${detalle.idvalidacion.idrevisionValidacion} + '\');'">
-								<i class='fa fa-eye' style='font-size: 24px; color: brown;'
-								aria-hidden='true'></i>Ver
-						</a>
-						</small>
+			<!-- 			<div class="list-group"> -->
+			<!-- 				<div th:each="detalle : ${detalleValidacion}" href="#" -->
+			<!-- 					title="Detalle" -->
+			<!-- 					th:attr="data-content=${detalle.idvalidacion.detalle}" -->
+			<!-- 					data-html="true" role="button" data-toggle="popover" -->
+			<!-- 					data-trigger="hover" -->
+			<!-- 					th:class="${detalle.idvalidacion.estado? 'list-group-item list-group-item-action flex-column align-items-start': 'list-group-item list-group-item-action flex-column align-items-start disabledbutton'}"> -->
 
 
-					</div>
 
-					<small>Modificado por <cite title="Source Title"
-						th:text="${detalle.idusuario.nombres}"></cite></small>
+
+			<div th:class="${detalle.idvalidacion.estado? 'list-group-item list-group-item-action flex-column align-items-start': 'list-group-item list-group-item-action flex-column align-items-start disabledbutton'}"   th:each="detalle : ${detalleValidacion}"
+				style="border-radius: 0 0 0 0;">
+				<div class="card-body">
+					<h5 class="card-title"
+						th:text="${detalle.idvalidacion.idrevisionValidacion+'. '+detalle.idvalidacion.revision}"></h5>
+					<h6 class="card-subtitle mb-2 text-muted">
+						Fecha de modificacion <label
+							th:text="${detalle.fechaModificacion}"></label> / Modificado por <cite
+							title="Source Title" th:text="${detalle.idusuario.nombres}"></cite>
+					</h6>
+					<!-- 					<p class="card-text">Some quick example text to build on the -->
+					<!-- 						card title and make up the bulk of the card's content.</p> -->
+					<a class="card-link"
+						th:onclick="'fnDisabledSection(\'' + ${detalle.idvalidacion.idrevisionValidacion} + '\');'">
+						<i class='fa fa-trash-o' style='font-size: 24px; color: brown;'
+						aria-hidden='true'></i> Desactivar
+					</a> <a class="card-link"
+						th:onclick="'fnLoadSection(\'' + ${detalle.idvalidacion.idrevisionValidacion} + '\');'">
+						<i class='fa fa-eye' style='font-size: 24px; color: brown;'
+						aria-hidden='true'></i> Ver
+					</a>
 				</div>
 			</div>
+
+
+
+			<!-- 				</div> -->
+			<!-- 			</div> -->
+
+
 		</div>
 
 	</div>
@@ -95,19 +106,14 @@
 				</button>
 			</div>
 			<div class="modal-body">
-
-
 				<div class="card">
 					<h5 class="card-header">
-
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="#"
 								th:text="${subElemento.idelemento.nombre}">Home</a></li>
 							<li class="breadcrumb-item active" aria-current="page"
 								th:text="${subElemento.nombre}">>Library</li>
 						</ol>
-
-
 					</h5>
 
 
@@ -127,28 +133,34 @@
 								name="idsubelemento.idsubelemento" />
 
 
-
 							<div class="form-group">
 								<label for="exampleFormControlInput1">Revision</label> <input
 									type="text" class="form-control" id="txtrevision"
 									name="revision" placeholder="">
 							</div>
+
+							<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">Archivos Adjuntos</h5>
+									<p class="card-text">With supporting text below as a
+										natural lead-in to additional content.</p>
+									<a href="#" class="btn btn-primary">Button</a>
+								</div>
+							</div>
+
+
 							<div class="form-group">
 								<label for="exampleFormControlTextarea1">Detalle</label>
-								<!-- 								<textarea class="form-control" id="txtdetalle" name="detalle" -->
-								<!-- 									rows="3"></textarea> -->
-
 								<textarea class="form-control" id="txtdetalle" name="editordata"></textarea>
 							</div>
 
 							<div class="form-group">
 								<label for="exampleFormControlTextarea1">Ayuda</label>
-								<!-- 								<textarea class="form-control" id="txtayuda" rows="3" -->
-								<!-- 									name="ayuda"></textarea> -->
 								<textarea class="form-control" id="txtayuda" name="editordata"></textarea>
-
-								<!-- 																 <div id="summernote"></div> -->
 							</div>
+
+
+
 						</form>
 
 
