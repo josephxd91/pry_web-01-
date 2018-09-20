@@ -31,25 +31,11 @@
 
 	</div>
 	<div class="card-body">
-		<!-- 		<h5 class="card-title">Agregar secciones</h5> -->
-		<!-- 		<p class="card-text">With supporting text below as a natural -->
-		<!-- 			lead-in to additional content.</p> -->
-
 		<div id="content-info">
 
 			<div th:if="${detalleValidacion.TotalElements!=0}">
 				<nav th:replace="layout/fragments/paginator-nav :: paginator"></nav>
 			</div>
-
-			<!-- 			<div class="list-group"> -->
-			<!-- 				<div th:each="detalle : ${detalleValidacion}" href="#" -->
-			<!-- 					title="Detalle" -->
-			<!-- 					th:attr="data-content=${detalle.idvalidacion.detalle}" -->
-			<!-- 					data-html="true" role="button" data-toggle="popover" -->
-			<!-- 					data-trigger="hover" -->
-			<!-- 					th:class="${detalle.idvalidacion.estado? 'list-group-item list-group-item-action flex-column align-items-start': 'list-group-item list-group-item-action flex-column align-items-start disabledbutton'}"> -->
-
-
 
 
 			<div
@@ -64,8 +50,9 @@
 							th:text="${detalle.fechaModificacion}"></label> / Modificado por
 						<cite title="Source Title" th:text="${detalle.idusuario.nombres}"></cite>
 					</h6>
-					<!-- 					<p class="card-text">Some quick example text to build on the -->
-					<!-- 						card title and make up the bulk of the card's content.</p> -->
+
+
+
 					<a class="card-link"
 						th:onclick="'fnDisabledSection(\'' + ${detalle.idvalidacion.idrevisionValidacion} + '\');'">
 						<i class='fa fa-trash-o' style='font-size: 24px; color: brown;'
@@ -74,17 +61,15 @@
 						th:onclick="'fnLoadSection(\'' + ${detalle.idvalidacion.idrevisionValidacion} + '\');'">
 						<i class='fa fa-eye' style='font-size: 24px; color: brown;'
 						aria-hidden='true'></i> Ver
-					</a> 
-					
-					<a class="card-link">
-						<i class='fa fa-eye' style='font-size: 24px; color: brown;'
-						aria-hidden='true'></i>Cumple  <select  class="custom-select" >
-						<option>NO APLICA</option>
-						<option>SI</option>
-						<option>NO</option>
+					</a> <a class="card-link"> <i class='fa fa-eye'
+						style='font-size: 24px; color: brown;' aria-hidden='true'></i>Cumple
+						<select class="custom-select">
+							<option>NO APLICA</option>
+							<option>SI</option>
+							<option>NO</option>
 					</select>
-					</a> 
-					
+					</a>
+
 				</div>
 			</div>
 
