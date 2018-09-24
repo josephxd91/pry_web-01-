@@ -30,7 +30,7 @@
 					<i class='fa fa-eye' style='font-size: 24px; color: brown;'
 					aria-hidden='true'></i>
 			</a></td>
-			<td><select id="cboCumpleValidacion"   th:onchange="'fnCambiarEstadoCheckList(\'' + ${detalle.idvalidacion.idrevisionValidacion} + '\');'"    class="custom-select">
+			<td><select   class="cboCumpleValidacion custom-select"  th:onchange="'fnCambiarEstadoCheckList(\'' + ${detalle.idvalidacion.idrevisionValidacion} + '\');'"   >
 					<option selected="selected" value="1">Si</option>
 					<option value="0">No</option>
 			</select></td>

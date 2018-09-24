@@ -213,7 +213,7 @@ var fviewOption = function(id) {
 
 
 var fnCambiarEstadoCheckList = function(id){
-	var cumple = $("#cboCumpleValidacion").val();
+	var cumple = $(".cboCumpleValidacion.custom-select").val();
 	console.log("id => "  + id + " - cumple ?" + cumple );
 }
 
