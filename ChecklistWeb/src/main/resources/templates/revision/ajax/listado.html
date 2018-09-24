@@ -1,0 +1,40 @@
+<!-- <div -->
+<!-- 	th:class="${detalle.idvalidacion.estado? 'list-group-item list-group-item-action flex-column align-items-start': 'list-group-item list-group-item-action flex-column align-items-start disabledbutton'}" -->
+<!-- 	th:each="detalle : ${detalleValidacion}" -->
+<!-- 	style="border-radius: 0 0 0 0;"> -->
+
+
+
+<table class="table table-sm">
+	<thead class="thead-dark">
+		<tr>
+			<th scope="col"></th>
+			<th scope="col">Revision</th>
+			<th scope="col">Fecha Modificacion</th>
+			<th scope="col">Ver</th>
+			<th scope="col">Cumple validacion</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="detalle : ${detalleValidacion}">
+			<td><div class="btn btn-success"
+					style="width: 25px; height: 25px;"></div></td>
+			<td><ins
+					th:text="${detalle.idvalidacion.idrevisionValidacion+'. '+detalle.idvalidacion.revision}"></ins>
+			</td>
+			<td>Fecha de modificacion <label
+				th:text="${detalle.fechaModificacion}"></label> / Modificado por <cite
+				title="Source Title" th:text="${detalle.idusuario.nombres}"></cite></td>
+			<td><a class="card-link"
+				th:onclick="'fnLoadSection(\'' + ${detalle.idvalidacion.idrevisionValidacion} + '\');'">
+					<i class='fa fa-eye' style='font-size: 24px; color: brown;'
+					aria-hidden='true'></i>
+			</a></td>
+			<td><select id="cboCumpleValidacion"   th:onchange="'fnCambiarEstadoCheckList(\'' + ${detalle.idvalidacion.idrevisionValidacion} + '\');'"    class="custom-select">
+					<option selected="selected" value="1">Si</option>
+					<option value="0">No</option>
+			</select></td>
+		</tr>
+	</tbody>
+</table>
+

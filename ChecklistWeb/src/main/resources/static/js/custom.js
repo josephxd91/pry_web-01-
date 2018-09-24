@@ -1,4 +1,4 @@
-fviewSetting = function(id) {
+var fviewSetting = function(id) {
 	$.get("/content_sections/section", {
 		id : id
 	}, function(data) {
@@ -6,7 +6,7 @@ fviewSetting = function(id) {
 	});
 }
 
-fnSearchAction = function() {
+var fnSearchAction = function() {
 	$.get("/content_sections/section_search", {
 		title : $("#txtsearch").val()
 	}, function(data) {
@@ -14,7 +14,7 @@ fnSearchAction = function() {
 	});
 }
 
-fnDisabledSection = function(key) {
+var fnDisabledSection = function(key) {
 	console.log(key);
 	$.get("/content_sections/disabled_detail", {
 		id : key
@@ -26,7 +26,7 @@ fnDisabledSection = function(key) {
 	// $.post();
 }
 
-fnSearchDetalle = function(id, page) {
+var fnSearchDetalle = function(id, page) {
 	console.log(id + " - " + page);
 	$.get("/content_sections/listar_detalle_page", {
 		id : id,
@@ -56,18 +56,18 @@ fnAplicarCambios = function() {
 	fnClearData();
 }
 
-fnRestaureEfectPopper = function() {
+var fnRestaureEfectPopper = function() {
 	$('[data-toggle="popover"]').popover('hide');
 }
 
-fnClearData = function() {
+var fnClearData = function() {
 	$("#txtrevisionid").val(0);
 	$("#txtdetalle").summernote('reset');
 	$("#txtayuda").summernote('reset');
 	$("#txtrevision").val("");
 }
 
-fnOpenModal = function() {
+var fnOpenModal = function() {
 	$("#myModal").modal({
 		backdrop : 'static',
 		keyboard : false,
@@ -75,12 +75,12 @@ fnOpenModal = function() {
 	});
 }
 
-fnCloseModal = function() {
+var fnCloseModal = function() {
 	$("#myModal").modal('hide');
 	fnClearData();
 }
 
-fnLoadSection = function(id) {
+var fnLoadSection = function(id) {
 
 	if (id == 0) {
 		return;
@@ -103,7 +103,7 @@ fnLoadSection = function(id) {
 
 }
 
-sendFile = function(file, el) {
+var sendFile = function(file, el) {
 	var form_data = new FormData();
 	form_data.append('file', file);
 	$.ajax({
@@ -178,7 +178,6 @@ fn_load_page_user = function() {
 	})
 }
 
-
 fn_validate_folder_shared = function() {
 	$.post("/setting/validateFolderShared", {
 		"folder" : $("#txtRutaCompleta").val(),
@@ -198,3 +197,28 @@ fn_validate_folder_shared = function() {
 	});
 
 }
+
+// ///revision
+
+var fviewOption = function(id) {
+	console.log("id  => " + id);
+	$.get("/revision/info", {
+		id : id
+	}, function(data) {
+		$("#sections_content").html(data);
+	});
+
+	
+}
+
+
+var fnCambiarEstadoCheckList = function(id){
+	var cumple = $("#cboCumpleValidacion").val();
+	console.log("id => "  + id + " - cumple ?" + cumple );
+}
+
+// fnLoadCheckList = function(){
+// $.post("revision/ajax/listado.html",{},function(data){
+// console.log(data);
+// });
+// }
